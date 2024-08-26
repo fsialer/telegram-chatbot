@@ -1,0 +1,50 @@
+# Maven build directory
+/target/
+
+# Maven Wrapper files
+/mvnw
+/mvnw.cmd
+/.mvn/
+
+# IntelliJ IDEA project files
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+# NetBeans project files
+.nb-gradle/
+nbproject/private/
+
+# VS Code settings
+.vscode/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Java specific files
+*.class
+*.jar
+*.war
+*.ear
+
+# User-specific files
+*.swp
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.old
+
+/bin/

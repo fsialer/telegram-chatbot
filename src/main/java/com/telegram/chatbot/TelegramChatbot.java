@@ -58,29 +58,31 @@ public class TelegramChatbot extends MultiSessionTelegramBot {
         if (getCallbackQueryButtonKey().equals("step_4_btn")) {
             setUserGlory(30);
             sendTextMessageAsync(STEP_5_TEXT,
-                    Map.of("Poner y encender Gopro!! +30 de fama", "step_5_btn"));
+                    Map.of("Encender y ponerse la GoPro!", "step_5_btn"));
         }
 
         if (getCallbackQueryButtonKey().equals("step_5_btn")) {
-            setUserGlory(20);
+            setUserGlory(40);
             sendTextMessageAsync(STEP_6_TEXT,
-                    Map.of("Un paseo al parque!+20 de fama", "step_6_btn",
-                            "Una visita al veterinario!+20 de fama", "step_6_btn"));
+                    Map.of("¡Correr por los tejados, grabar con la GoPro! +40 de fama", "step_6_btn",
+                            "¡Atacar a otros gatos desde tu escondite con la GoPro! +40 de fama\r\n" + //
+                                    "",
+                            "step_6_btn",
+                            "¡Atacar a los perros desde tu escondite con la GoPro! +40 de fama", "step_6_btn"));
         }
 
         if (getCallbackQueryButtonKey().equals("step_6_btn")) {
-            setUserGlory(20);
+            setUserGlory(40);
             sendTextMessageAsync(STEP_7_TEXT,
-                    Map.of("Hackear contraseña!+20 de fama", "step_7_btn"));
+                    Map.of("Romper la contraseña", "step_7_btn"));
         }
 
         if (getCallbackQueryButtonKey().equals("step_7_btn")) {
-            setUserGlory(30);
+            addUserGlory(50);
             sendTextMessageAsync(STEP_8_TEXT,
-                    Map.of("Ver final épico!!", "step_8_btn"));
+                    Map.of("Salir al patio", "step_8_btn"));
         }
         if (getCallbackQueryButtonKey().equals("step_8_btn")) {
-            setUserGlory(30);
             sendTextMessageAsync(FINAL_TEXT);
         }
 

@@ -122,7 +122,7 @@ public class MultiSessionTelegramBot extends TelegramLongPollingBot {
             InputFile inputFile = new InputFile();
             var is = ClassLoader.getSystemResourceAsStream("images/" + name + ".jpg");
             inputFile.setMedia(is, name);
-
+            System.out.println(System.getProperty("java.class.path"));
             photo.setPhoto(inputFile);
             Long chatId = getCurrentChatId();
             photo.setChatId(chatId);
@@ -142,5 +142,11 @@ public class MultiSessionTelegramBot extends TelegramLongPollingBot {
 
     public void addUserGlory(int glories) {
         gloryStorage.put(getCurrentChatId(), getUserGlory() + glories);
+    }
+    public void sendMessage(int userGlory, String picName, String text, Map<String, String> buttons) {
+        addUserGlory(userGlory);
+        SendPhoto photoMessage = createPhotoMessage(picName);
+        executeAsync(photoMessage);
+        sendApiMethodAsync(createMessage(text, buttons));
     }
 }

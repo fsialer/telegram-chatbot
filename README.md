@@ -22,8 +22,8 @@ Pasos para compilar
 
 - Compilar el proyecto
 
-        mvn compile
-
+        mvn clean package
+        
 - Ejecutar el codigo compilado
 
-        mvn exec:java -Dexec.mainClass="com.telegram.chatbot.TelegramChatbot"
+        java -jar target/telegram-chatbot-1.0-SNAPSHOT.jar

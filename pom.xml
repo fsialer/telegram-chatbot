@@ -59,6 +59,42 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                 <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>com.telegram.chatbot.TelegramChatbot</mainClass>
+                     <classpathScope>runtime</classpathScope> <!-- Esto asegura que los recursos se incluyan -->
+                </configuration>
+            </plugin>
+            <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-shade-plugin</artifactId>
+      <version>3.2.4</version>
+      <executions>
+        <execution>
+          <phase>package</phase>
+          <goals>
+            <goal>shade</goal>
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+        <transformers>
+          <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+            <mainClass>com.telegram.chatbot.TelegramChatbot</mainClass>
+          </transformer>
+        </transformers>
+      </configuration>
+    </plugin>
         </plugins>
     </build>
 </project>

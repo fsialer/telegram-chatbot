@@ -15,7 +15,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 public class MultiSessionTelegramBot extends TelegramLongPollingBot {
- private String name;
+    private String name;
     private String token;
 
     private ThreadLocal<Update> updateEvent = new ThreadLocal<>();
@@ -43,7 +43,7 @@ public class MultiSessionTelegramBot extends TelegramLongPollingBot {
     }
 
     public void onUpdateEventReceived(Update updateEvent) {
-        //do nothing
+        // do nothing
     }
 
     public Long getCurrentChatId() {
@@ -71,7 +71,7 @@ public class MultiSessionTelegramBot extends TelegramLongPollingBot {
         sendApiMethodAsync(message);
     }
 
-    public void sendTextMessageAsync(String text,  Map<String, String> buttons) {
+    public void sendTextMessageAsync(String text, Map<String, String> buttons) {
         SendMessage message = createMessage(text, buttons);
         sendApiMethodAsync(message);
     }
@@ -81,8 +81,7 @@ public class MultiSessionTelegramBot extends TelegramLongPollingBot {
         executeAsync(photo);
     }
 
-
-    public SendMessage createMessage( String text) {
+    public SendMessage createMessage(String text) {
         SendMessage message = new SendMessage();
         message.setText(new String(text.getBytes(), StandardCharsets.UTF_8));
         message.setParseMode("markdown");
@@ -91,7 +90,7 @@ public class MultiSessionTelegramBot extends TelegramLongPollingBot {
         return message;
     }
 
-    public SendMessage createMessage( String text, Map<String, String> buttons) {
+    public SendMessage createMessage(String text, Map<String, String> buttons) {
         SendMessage message = createMessage(text);
         if (buttons != null && !buttons.isEmpty())
             attachButtons(message, buttons);
@@ -121,6 +120,8 @@ public class MultiSessionTelegramBot extends TelegramLongPollingBot {
             SendPhoto photo = new SendPhoto();
             InputFile inputFile = new InputFile();
             var is = ClassLoader.getSystemResourceAsStream("images/" + name + ".jpg");
+            System.out.println(System.getProperty("java.class.path"));
+            System.out.println("is:" + is);
             inputFile.setMedia(is, name);
 
             photo.setPhoto(inputFile);
@@ -132,15 +133,22 @@ public class MultiSessionTelegramBot extends TelegramLongPollingBot {
         }
     }
 
-
     public void setUserGlory(int glories) {
-        gloryStorage.put( getCurrentChatId(), glories);
+        gloryStorage.put(getCurrentChatId(), glories);
     }
+
     public int getUserGlory() {
-        return gloryStorage.getOrDefault( getCurrentChatId(), 0);
+        return gloryStorage.getOrDefault(getCurrentChatId(), 0);
     }
 
     public void addUserGlory(int glories) {
         gloryStorage.put(getCurrentChatId(), getUserGlory() + glories);
+    }
+
+    public void sendMessage(int userGlory, String picName, String text, Map<String, String> buttons) {
+        addUserGlory(userGlory);
+        SendPhoto photoMessage = createPhotoMessage(picName);
+        executeAsync(photoMessage);
+        sendApiMethodAsync(createMessage(text, buttons));
     }
 }
